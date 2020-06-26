@@ -21,7 +21,7 @@ class MediaController extends AdminController
      * @var string
      */
     protected $title = '媒体设置';
-    
+
     // ===================================================
     /**
      * Index interface.
@@ -41,7 +41,7 @@ class MediaController extends AdminController
                     $form = new \Encore\Admin\Widgets\Form();
                     $form->action(admin_url('/media'));
                     $form->select('parent_id', trans('上级栏目'))->options(Media::selectOptions());
-                    $form->text('title', __('名称'));
+                    $form->text('title', __('名称'))->autofocus();
                     $form->hidden('_token')->default(csrf_token());
                     $column->append((new Box(trans('添加'), $form))->style('success'));
                 });
@@ -90,7 +90,7 @@ class MediaController extends AdminController
         $form = new Form(new Media());
 
         $form->select('parent_id', trans('上级栏目'))->options(Media::selectOptions());
-        $form->text('title', __('名称'));
+        $form->text('title', __('名称'))->autofocus();
 
         return $form;
     }

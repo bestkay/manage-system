@@ -15,16 +15,19 @@ class Sign extends RowAction
     public function handle(Model $model, Request $request)
     {
         $patient = Patient::find($model->id);
-    	$data = [];
-    	$data = $request->only(['doctor_b_id', 'doctor_a_id', 'status', 'arrive_time']);
-        $patient->update($data);
+        $patient->doctor_b_id = $request['doctor_b_id'];
+        $patient->doctor_a_id = $request['doctor_a_id'];
+        $patient->status = $request['status'];
+        $patient->arrive_time = $request['arrive_time'];
+        $patient->memo = $model->memo. '<br>' .$request['memo'];
+        $patient->save();
 
         return $this->response()->success('签到完成')->refresh();
     }
 
     public function form(Model $model)
 	{
-	    
+
     	// 接诊医生
     	$this->select('doctor_b_id', '接诊医生')->options(Doctor::where('parent_id', 2)->pluck('title', 'id'))->default($model->doctor_b_id);
     	// 主治医生
@@ -34,8 +37,8 @@ class Sign extends RowAction
     		1 => '已到',
     		2 => '不来了'
     	])->default($model->status);;
-    	// 导员时间
     	$this->datetime('arrive_time', '到院时间')->default($model->arrive_time);;
+        $this->textarea('memo', '备注');
 	}
 
 }

@@ -27,7 +27,7 @@ class EngineController extends AdminController
             ->title(trans('搜索引擎设置'))
             ->row(function (Row $row) {
                 $row->column(6, $this->grid());
-                
+
                 $row->column(6, function (Column $column) {
                     $form = new \Encore\Admin\Widgets\Form();
                     $form->action(admin_url('/engines'));
@@ -85,7 +85,7 @@ class EngineController extends AdminController
     {
         $form = new Form(new Engine());
 
-        $form->text('title', __('标题'));
+        $form->text('title', __('标题'))->autofocus();
 
         return $form;
     }

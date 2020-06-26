@@ -39,7 +39,7 @@ class DepartmentController extends AdminController
                     $form = new \Encore\Admin\Widgets\Form();
                     $form->action(admin_url('/departments'));
                     $form->select('parent_id', trans('上级栏目'))->options(Department::selectOptions());
-                    $form->text('title', __('科室名称'));
+                    $form->text('title', __('科室名称'))->autofocus();
                     $form->text('intro', __('科室简介'));
                     $form->hidden('_token')->default(csrf_token());
                     $column->append((new Box(trans('添加'), $form))->style('success'));
@@ -58,7 +58,7 @@ class DepartmentController extends AdminController
     // {
     //     return redirect()->route('Departments.id.edit', ['id' => $id]);
     // }
-    
+
     protected function detail($id)
     {
         return redirect()->route('admin.departments.edit', ['department' => $id]);
@@ -89,7 +89,7 @@ class DepartmentController extends AdminController
         $form = new Form(new Department());
 
         $form->select('parent_id', trans('admin.parent_id'))->options(Department::selectOptions());
-        $form->text('title', __('科室名称'));
+        $form->text('title', __('科室名称'))->autofocus();
         $form->text('intro', __('科室简介'));
 
         return $form;

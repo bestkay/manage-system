@@ -42,11 +42,11 @@ $factory->define(App\Admin\Model\Patient::class, function (Faker $faker) {
         'keyword' 			=> $faker->word,
         'media_id'  		=> $faker->randomElement(Media::where('parent_id', '>', 0)->pluck('id')->toArray()),
         'area_id'  			=> $faker->numberBetween(1, 3632),
-        'admin_user_id'  	=> $faker->numberBetween(1, 5),
-        'author_id'  		=> $faker->numberBetween(1, 5),
-        'doctor_a_id'  		=> $faker->randomElement(Doctor::where('parent_id', 2)->pluck('id')->toArray()),
-        'doctor_b_id'  		=> $faker->randomElement(Doctor::where('parent_id', 1)->pluck('id')->toArray()),
-        'come_time'  		=> $faker->dateTimeBetween('now', '2020-12-01', 'PRC'),
+        'admin_user_id'  	=> 1,
+        'author_id'  		=> 1,
+        // 'doctor_a_id'  		=> $faker->randomElement(Doctor::where('parent_id', 2)->pluck('id')->toArray()),
+        // 'doctor_b_id'  		=> $faker->randomElement(Doctor::where('parent_id', 1)->pluck('id')->toArray()),
+        'come_time'  		=> $faker->dateTimeBetween('yesterday', '2020-06-19', 'PRC'),
         'status'  			=> rand(0, 1)
     ];
 });

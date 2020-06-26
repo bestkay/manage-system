@@ -21,7 +21,7 @@ class DiseaseController extends AdminController
      * @var string
      */
     protected $title = '疾病设置';
-    
+
     /**
      * Index interface.
      *
@@ -31,7 +31,7 @@ class DiseaseController extends AdminController
      */
     public function index(Content $content)
     {
-        
+
         return $content
             ->title(trans('疾病设置'))
             ->row(function (Row $row) {
@@ -41,7 +41,7 @@ class DiseaseController extends AdminController
                     $form = new \Encore\Admin\Widgets\Form();
                     $form->action(admin_url('/diseases'));
                     $form->select('parent_id', trans('上级栏目'))->options(Disease::selectOptions());
-                    $form->text('title', __('疾病名称'));
+                    $form->text('title', __('疾病名称'))->autofocus();
                     $form->textarea('items', __('治疗项目'));
                     $form->text('intro', __('疾病简介'));
                     $form->hidden('_token')->default(csrf_token());
@@ -93,7 +93,7 @@ class DiseaseController extends AdminController
         $form = new Form(new Disease());
 
         $form->select('parent_id', trans('上级栏目'))->options(Disease::selectOptions());
-        $form->text('title', __('疾病名称'));
+        $form->text('title', __('疾病名称'))->autofocus();
         $form->textarea('items', __('治疗项目'));
         $form->text('intro', __('疾病简介'));
 

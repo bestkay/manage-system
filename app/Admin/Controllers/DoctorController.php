@@ -27,12 +27,12 @@ class DoctorController extends AdminController
             ->title(trans('医生设置'))
             ->row(function (Row $row) {
                 $row->column(6, Doctor::tree());
-                
+
                 $row->column(6, function (Column $column) {
                     $form = new \Encore\Admin\Widgets\Form();
                     $form->action(admin_url('/doctors'));
                     $form->select('parent_id', trans('上级栏目'))->options(Doctor::selectOptions());
-                    $form->text('title', __('医生名称'));
+                    $form->text('title', __('医生名称'))->autofocus();
                     $form->text('intro', __('医生简介'));
                     $form->hidden('_token')->default(csrf_token());
                     $column->append((new Box(trans('添加'), $form))->style('success'));
@@ -76,7 +76,7 @@ class DoctorController extends AdminController
         $form = new Form(new Doctor());
 
         $form->select('parent_id', trans('所属分类'))->options(Doctor::selectOptions());
-        $form->text('title', __('医生名字'));
+        $form->text('title', __('医生名字'))->autofocus();
         $form->text('intro', __('医生简介'));
 
         return $form;
